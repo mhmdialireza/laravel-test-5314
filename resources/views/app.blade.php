@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    </head>
-    <body >
-    </body>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laravel</title>
+    <link rel="stylesheet" href="{{ asset('assets/styles/bootstrap.rtl.min.css') }}">
+</head>
+
+<body dir="rtl">
+    <main class="container vh-100">
+        <div class="py-5 grid">
+            @yield('content')
+        </div>
+    </main>
+</body>
+
 </html>

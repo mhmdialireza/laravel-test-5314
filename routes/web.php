@@ -2,7 +2,11 @@
 
 
 use App\Enums\Role;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // $a = array_column(Role::cases(), 'value');
-    $a = Role::cases();
-    dd(array_column(Role::cases(), 'value'));
-    return $a;
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login-form');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::middleware(Authenticate::class)->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/', 'index')->name('dashboard');
+    });
+    Route::controller(RequestController::class)->group(function () {
+        Route::get('/request', 'create')->name('create-request-form');
+        Route::post('/request', 'store')->name('create-request');
+    });
 });

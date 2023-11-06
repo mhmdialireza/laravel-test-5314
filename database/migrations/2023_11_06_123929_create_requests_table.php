@@ -16,10 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('subject', 32);
             $table->string('description', 256);
-            $table->boolean('has_manager_approved');
-            $table->boolean('has_supervisor_approved');
+            $table->boolean('has_manager_approved')->default(false);
+            $table->boolean('has_supervisor_approved')->default(false);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->enum('urgency', array_column(Urgency::cases(), 'value'));
+            $table->enum('urgency', array_column(Urgency::cases(), 'value'))->default(Urgency::Normal->value);
             $table->timestamps();
         });
     }

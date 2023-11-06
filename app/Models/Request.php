@@ -14,8 +14,14 @@ class Request extends Model
         'description',
         'has_manager_approved',
         'has_supervisor_approved',
-        'urgency'
+        'urgency',
+        'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function files()
     {
