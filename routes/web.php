@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Enums\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // $a = array_column(Role::cases(), 'value');
+    $a = Role::cases();
+    dd(array_column(Role::cases(), 'value'));
+    return $a;
 });
