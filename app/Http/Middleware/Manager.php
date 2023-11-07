@@ -15,11 +15,11 @@ class Manager
      */
     public function handle(Request $request, Closure $next): Response
     {
-        abort_if(auth()->user()->role != 2, Response::HTTP_UNAUTHORIZED);
+        // abort_if(auth()->user()->role != 2, Response::HTTP_UNAUTHORIZED);
 
-        // if (auth()->user()->role != 2) {
-        //     return redirect()->to(route('home'))->with('message', 'دسترسی غیر مجاز');
-        // }
+        if (auth()->user()->role != 2) {
+            return redirect()->to(route('home'))->with('message', 'دسترسی غیر مجاز');
+        }
         return $next($request);
     }
 }

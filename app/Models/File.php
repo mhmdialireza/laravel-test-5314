@@ -14,4 +14,9 @@ class File extends Model
         'request_id',
         'type',
     ];
+
+    public function request()
+    {
+        return $this->belongsTo(Request::class);
+    }
 }
