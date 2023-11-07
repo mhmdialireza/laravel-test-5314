@@ -18,30 +18,49 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach (Role::cases() as $role) {
-            $newRole = ModelsRole::create(['code' => $role->value]);
-            $newUser = User::create([
-                'username' => Role::from($newRole->code)->name,
-                'password' => Hash::make(Role::from($newRole->code)->name),
-            ]);
+        // $this->run([
 
-            $newUser->roles()->attach($newRole->id);
-        }
+        // ]);
+        $newUser = User::create([
+            'username' => 'کاربر',
+            'password' => Hash::make(1234),
+            'role' => 0
+        ]);
+        $newUser = User::create([
+            'username' => 'سرپرست',
+            'password' => Hash::make(1234),
+            'role' => 1
+        ]);
+        $newUser = User::create([
+            'username' => 'مدیر',
+            'password' => Hash::make(1234),
+            'role' => 2
+        ]);
+
 
         Request::create([
             'subject' => 'سلام',
             'description' => 'سلام سلام',
-            'user_id' => 1
+            'user_id' => 1,
+            'importance' => 0
         ]);
         Request::create([
-            'subject' => 'سلام',
+            'subject' => '2سلام',
             'description' => 'سلام سلام',
-            'user_id' => 2
+            'user_id' => 2,
+            'importance' => 2
         ]);
         Request::create([
-            'subject' => 'سلام',
+            'subject' => '3سلام',
             'description' => 'سلام سلام',
-            'user_id' => 3
+            'user_id' => 3,
+            'importance' => 1
+        ]);
+        Request::create([
+            'subject' => '4سلام',
+            'description' => 'سلام سلام',
+            'user_id' => 3,
+            'importance' => 0
         ]);
     }
 }

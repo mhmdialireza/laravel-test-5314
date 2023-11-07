@@ -14,7 +14,7 @@ class Request extends Model
         'description',
         'has_manager_approved',
         'has_supervisor_approved',
-        'urgency',
+        'importance',
         'user_id'
     ];
 

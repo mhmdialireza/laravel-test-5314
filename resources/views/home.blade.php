@@ -20,7 +20,10 @@
                 <th scope="col">فوریت</th>
                 <th scope="col">سرپرست</th>
                 <th scope="col">مدیرعامل</th>
-                <th scope="col">عملیات</th>
+                @if (auth()->user()->role != 0)
+                    <th scope="col">عملیات</th>
+                @endif
+
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -30,14 +33,18 @@
                     <td>{{ Jalalian::fromCarbon($request->created_at)->format('Y/m/d') }}</td>
                     <td>{{ $request->user->username }}</td>
                     <td>{{ $request->subject }}</td>
-                    <td>{{ Urgency::from($request->urgency)->getLabel() }}</td>
-                    <td>{{ $request->has_manager_approved == false ? '-' : '✅' }}</td>
+                    <td>{{ Urgency::from($request->importance)->getLabel() }}</td>
                     <td>{{ $request->has_supervisor_approved == false ? '-' : '✅' }}</td>
-                    <td><button type="button" class="btn btn-primary">مشاهده</button></td>
+                    <td>{{ $request->has_manager_approved == false ? '-' : '✅' }}</td>
+                    @if (auth()->user()->role != 0)
+                        <td><a href="{{ route('show-request', $request->id) }}" type="button"
+                                class="btn btn-primary">مشاهده</a></td>
+                    @endif
                 </tr>
             @empty
                 <p>هیچ درخواستی وجود ندارد.</p>
             @endforelse
         </tbody>
     </table>
+    {{ $requests->links() }}
 @endsection

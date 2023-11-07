@@ -20,14 +20,16 @@ class AuthController extends Controller
     {
         $user = User::select('id', 'username', 'password')->where('username', $request->get('username'))->first();
 
-        // dd($user->password, $request->password);..
         if (!Hash::check($request->password, $user->password)) {
             Redirect()->back()->with('message', 'چنین کاربری وجود ندارد.');
-        } // TODO: set flush message in view
+        } 
+        
+        // TODO: set flush message in view
         //TODO: use attempt
+
         Auth::loginUsingId($user->id);
 
-        return redirect()->to(route('dashboard'));
+        return redirect()->to(route('home'));
     }
 
     public function logout()

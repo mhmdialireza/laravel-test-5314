@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('has_manager_approved')->default(false);
             $table->boolean('has_supervisor_approved')->default(false);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->enum('urgency', array_column(Urgency::cases(), 'value'))->default(Urgency::Normal->value);
+            $table->tinyInteger('importance')->default(0);
             $table->timestamps();
         });
     }

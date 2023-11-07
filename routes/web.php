@@ -5,7 +5,7 @@ use App\Enums\Role;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RequestController;
 
 /*
@@ -24,11 +24,14 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware(Authenticate::class)->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::controller(DashboardController::class)->group(function () {
-        Route::get('/', 'index')->name('dashboard');
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('/', 'index')->name('home');
     });
-    Route::controller(RequestController::class)->group(function () {
-        Route::get('/request', 'create')->name('create-request-form');
-        Route::post('/request', 'store')->name('create-request');
+    Route::controller(RequestController::class)->prefix('request')->group(function () {
+        Route::get('/', 'create')->name('create-request-form');
+        Route::post('/', 'store')->name('create-request');
+        Route::get('/{request}', 'show')->name('show-request');
+        Route::put('/{request}/supervisor-approve', 'supervisorApprove')->middleware('supervisor')->name('supervisor-approve-request');
+        Route::put('/{request}/manager-approve', 'managerApprove')->middleware('manager')->name('manager-approve-request');
     });
 });
