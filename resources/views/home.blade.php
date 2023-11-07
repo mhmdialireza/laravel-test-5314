@@ -20,9 +20,7 @@
                 <th scope="col">فوریت</th>
                 <th scope="col">سرپرست</th>
                 <th scope="col">مدیرعامل</th>
-                @if (auth()->user()->role != 0)
-                    <th scope="col">عملیات</th>
-                @endif
+                <th scope="col">عملیات</th>
 
             </tr>
         </thead>
@@ -36,10 +34,8 @@
                     <td>{{ Urgency::from($request->importance)->getLabel() }}</td>
                     <td>{{ $request->has_supervisor_approved == false ? '-' : '✅' }}</td>
                     <td>{{ $request->has_manager_approved == false ? '-' : '✅' }}</td>
-                    @if (auth()->user()->role != 0)
-                        <td><a href="{{ route('show-request', $request->id) }}" type="button"
-                                class="btn btn-primary">مشاهده</a></td>
-                    @endif
+                    <td><a href="{{ route('show-request', $request->id) }}" type="button"
+                            class="btn btn-primary">مشاهده</a></td>
                 </tr>
             @empty
                 <p>هیچ درخواستی وجود ندارد.</p>

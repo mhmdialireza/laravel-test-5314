@@ -25,7 +25,7 @@ class StoreRequestRequest extends FormRequest
     {
         return [
             'subject' => ['required', 'string'],
-            'description' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
             'importance' => ['required', Rule::in(Urgency::values())],
             'attachments.*' => ['nullable', 'mimes:png,mp4,mp3']
         ];

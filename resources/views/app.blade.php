@@ -10,6 +10,11 @@
 
 <body dir="rtl">
     <main class="container vh-100">
+        @if (Session::has('message'))
+            <div>
+                <p class="alert alert-info">{{ Session::get('message') }}</p>
+            </div>
+        @endif
         <div class="py-5 grid">
             @yield('content')
         </div>

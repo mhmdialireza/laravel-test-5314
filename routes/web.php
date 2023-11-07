@@ -1,7 +1,6 @@
 <?php
 
 
-use App\Enums\Role;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;

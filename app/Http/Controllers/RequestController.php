@@ -20,15 +20,15 @@ class RequestController extends Controller
     {
         $newRequest = Request::create([...$request->all(), 'user_id' => auth()->id()]);
 
+        // check for files
         if ($request->hasFile('attachments')) {
             $attachments = $request->file('attachments');
             foreach ($attachments as $attachment) {
                 $originalName = $attachment->getClientOriginalName();
-
                 $extension = pathinfo($originalName, PATHINFO_EXTENSION);
-
                 $path = Storage::disk('public')->put('attachments', $attachment);
 
+                // create record for new files and relate to request
                 File::create([
                     'path' => $path,
                     'type' => $extension,
@@ -55,6 +55,11 @@ class RequestController extends Controller
 
     public function managerApprove(Request $request)
     {
+        // check for approving by supervisor
+        if ($request->has_supervisor_approved == 0) {
+            return redirect()->to(route('home'))->with('message', 'نیاز به تایید سرپرست');
+        }
+
         $request->has_manager_approved = 1;
         $request->save();
 

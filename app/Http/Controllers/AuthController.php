@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -21,11 +19,8 @@ class AuthController extends Controller
         $user = User::select('id', 'username', 'password')->where('username', $request->get('username'))->first();
 
         if (!Hash::check($request->password, $user->password)) {
-            Redirect()->back()->with('message', 'چنین کاربری وجود ندارد.');
-        } 
-        
-        // TODO: set flush message in view
-        //TODO: use attempt
+           return redirect()->back()->with('message', 'چنین کاربری وجود ندارد.');
+        }
 
         Auth::loginUsingId($user->id);
 
