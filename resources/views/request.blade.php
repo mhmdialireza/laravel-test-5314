@@ -1,7 +1,7 @@
 @extends('app')
 
 @php
-    use App\Enums\Urgency;
+    use App\Enums\Importance;
 @endphp
 
 @section('content')
@@ -12,7 +12,7 @@
         </div>
         <div>
             <span>فوریت:</span>
-            <span>{{ Urgency::from($request->imspanortance)->getLabel() }}</span>
+            <span>{{ Importance::from($request->imspanortance)->getLabel() }}</span>
         </div>
         <div>
             <span>توضیحات:</span>

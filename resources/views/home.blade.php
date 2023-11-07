@@ -1,7 +1,7 @@
 @extends('app')
 
 @php
-    use App\Enums\Urgency;
+    use App\Enums\Importance;
     use Morilog\Jalali\Jalalian;
 @endphp
 
@@ -31,7 +31,7 @@
                     <td>{{ Jalalian::fromCarbon($request->created_at)->format('Y/m/d') }}</td>
                     <td>{{ $request->user->username }}</td>
                     <td>{{ $request->subject }}</td>
-                    <td>{{ Urgency::from($request->importance)->getLabel() }}</td>
+                    <td>{{ Importance::from($request->importance)->getLabel() }}</td>
                     <td>{{ $request->has_supervisor_approved == false ? '-' : '✅' }}</td>
                     <td>{{ $request->has_manager_approved == false ? '-' : '✅' }}</td>
                     <td><a href="{{ route('show-request', $request->id) }}" type="button"

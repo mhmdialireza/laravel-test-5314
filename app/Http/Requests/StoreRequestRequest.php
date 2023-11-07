@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\Urgency;
+use App\Enums\Importance;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -26,8 +26,8 @@ class StoreRequestRequest extends FormRequest
         return [
             'subject' => ['required', 'string'],
             'description' => ['nullable', 'string'],
-            // Rule::in(Urgency::values())] => [0,1,2] (dynamic array)
-            'importance' => ['required', Rule::in(Urgency::values())],
+            // Rule::in(Importance::values())] => [0,1,2] (dynamic array)
+            'importance' => ['required', Rule::in(Importance::values())],
             'attachments.*' => ['nullable', 'mimes:png,mp4,mp3']
         ];
     }

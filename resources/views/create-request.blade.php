@@ -1,7 +1,7 @@
 @extends('app')
 
 @php
-    use App\Enums\Urgency;
+    use App\Enums\Importance;
 @endphp
 
 @section('content')
@@ -16,9 +16,9 @@
             <input type="text" class="form-control" id="description" name="description">
         </div>
         <select class="form-select" name="importance">
-            @foreach (Urgency::values() as $value)
+            @foreach (Importance::values() as $value)
                 <option {{ $loop->iteration == 1 ? 'selected' : '' }} value="{{ $value }}">
-                    {{ Urgency::from($value)->getLabel() }}
+                    {{ Importance::from($value)->getLabel() }}
                 </option>
             @endforeach
         </select>

@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use App\Trait\EnumToArray;
 
-enum Urgency: int
+enum Importance: int
 {
   case Normal = 0;
   case Instantaneous = 1;
